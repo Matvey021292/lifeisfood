@@ -3695,3 +3695,22 @@ span.info-desc{
 }
 
 
+.page-numbers{
+	min-width: 30px;
+	min-height: 30px;
+	padding: 5px;
+	font-size: 14px;
+	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	color: #8f8f8f;
+}
+.page-numbers.current{
+	background: #32325d;
+	color: #fff;
+	box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+}
+.nav-links{
+	
+}

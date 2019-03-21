@@ -133,27 +133,36 @@ get_header();
 														</div>
 													</div>
 												</div>
-											<?php endwhile;
-										endif;
-										wp_reset_postdata(); ?>
+											<?php endwhile;?>
+											<?php endif;
+											wp_reset_postdata(); ?>
+												<?php if (  $wp_query->max_num_pages > 1 ) : ?>
+												<script>
+													var ajaxurl = '<?php echo site_url() ?>/wp-admin/admin-ajax.php';
+													var true_posts = '<?php echo serialize($wp_query->query_vars); ?>';
+													var current_page = <?php echo (get_query_var('paged')) ? get_query_var('paged') : 1; ?>;
+													var max_pages = '<?php echo $wp_query->max_num_pages; ?>';
+												</script>
+												<div id="true_loadmore">Загрузить ещё</div>
+											<?php endif; ?>
+										</div>
 									</div>
 								</div>
 							</div>
+							<div class="row paginations">
+								<div class="col-md-12 d-flex justify-content-center">
+									<?php the_posts_pagination(); ?>
+								</div>
+							</div>
 						</div>
-						<div class="row paginations">
-						<div class="col-md-12 d-flex justify-content-center">
-							<?php the_posts_pagination(); ?>
-						</div>
+
 					</div>
+					<div class="col-md-12">
 					</div>
-					
 				</div>
-				<div class="col-md-12">
+				<div class="col-lg-3"> 
+					<?php get_sidebar();?>
 				</div>
-			</div>
-			<div class="col-lg-3"> 
-				<?php get_sidebar();?>
 			</div>
 		</div>
-	</div>
-	<?php get_footer();
+		<?php get_footer();

@@ -46,10 +46,10 @@ if ( ! function_exists( 'cooked_setup' ) ) :
 
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
-            'menu-1' => esc_html__( 'Primary', 'cooked' ),
-            'menu-2' => esc_html__( 'menu2', 'cooked' ),
-            'type' => esc_html__( 'type', 'cooked' ),
-            'country' => esc_html__( 'country', 'cooked' ),
+			'menu-1' => esc_html__( 'Primary', 'cooked' ),
+			'menu-2' => esc_html__( 'menu2', 'cooked' ),
+			'type' => esc_html__( 'type', 'cooked' ),
+			'country' => esc_html__( 'country', 'cooked' ),
 		) );
 
 		/*
@@ -197,15 +197,95 @@ function trim_title_chars($count, $after) {
 
 add_filter( 'get_the_archive_title', function ( $title ) {
 
-    if( is_category() ) {
+	if( is_category() ) {
 
-        $title = single_cat_title( '', false );
+		$title = single_cat_title( '', false );
 
-    }
+	}
 
-    return $title;
+	return $title;
 
 });
 
-function evgmoskalenko_copyright() { ?> <script> document.oncopy = function () { var bodyElement = document.body; var selection = getSelection(); var href = document.location.href; var copyright = "<br><br>Источник: <a href='"+ href +"'>" + href + "</a><br>© lifeisfood"; var text = selection + copyright; var divElement = document.createElement('div'); divElement.style.position = 'absolute'; divElement.style.left = '-99999px'; divElement.innerHTML = text; bodyElement.appendChild(divElement); selection.selectAllChildren(divElement); setTimeout(function() { bodyElement.removeChild(divElement); }, 0); }; </script> <?php } add_action('wp_footer', 'evgmoskalenko_copyright', 95);
+function true_load_posts(){
+
+	$args = unserialize( stripslashes( $_POST['query'] ) );
+	$args['paged'] = $_POST['page'] + 1; // следующая страница
+	$args['post_status'] = 'publish';
+
+	// обычно лучше использовать WP_Query, но не здесь
+	query_posts( $args );
+	// если посты есть
+	if( have_posts() ) :
+
+		// запускаем цикл
+		while( have_posts() ): the_post(); ?>
+
+			<div class="col-md-6">
+				<div class="entry entry-content-min entry-small post-27 post type-post status-publish format-standard has-post-thumbnail hentry">
+					<div class="entry-content ">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="entry-thumb entry-thumb-type">
+									<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" class='featured-recipe effect-lily loading'>
+										<?php if (has_post_thumbnail()) { ?>
+
+											<img 
+											title="<?php the_title(); ?>" 
+											alt="<?php the_title(); ?>"
+											class="b-lazy img-responsive wp-post-image"
+											src="<?php echo get_the_post_thumbnail_url(get_the_ID(),"medium") ?>.webp"
+											>
+										<?php } else { ?>
+											<img title="<?php the_title(); ?>" alt="<?php the_title(); ?>"
+											src='/wp-content/themes/cooked/assets/img/wirwar.jpg'
+											class="img-responsive wp-post-image">
+										<?php } ?>
+
+										<?php showIconCat(14); ?>
+									</a>
+
+								</div>
+								<div class="button-position-c">
+									<button class="button--moema addPost-btn btn btn-outline-primary-dev"><i
+										class="fas fa-plus"></i></button>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="entry-prev">
+										<a href="<?php the_permalink() ?>"
+											title="<?php trim_title_chars(100, '...'); ?>"><h3
+											class="entry-title entry-title-min"><?php trim_title_chars(100, '...'); ?></h3>
+										</a>
+										<hr>
+										<?php
+
+										?>
+										<div class="entry-summary">
+											<span class="justify-content-end info-cook min-icon show-list-btn d-flex
+											align-items-center"><span>Список ингредиентов</span><i style="color: #ff1744;"
+											class="ml-2
+											fas
+											fa-caret-down"></i></span>
+											<?php showListComp(); ?>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<?php 	endwhile;
+
+		endif;
+		die();
+	}
+
+
+	add_action('wp_ajax_loadmore', 'true_load_posts');
+	add_action('wp_ajax_nopriv_loadmore', 'true_load_posts');
+
+	function evgmoskalenko_copyright() { ?> <script> document.oncopy = function () { var bodyElement = document.body; var selection = getSelection(); var href = document.location.href; var copyright = "<br><br>Источник: <a href='"+ href +"'>" + href + "</a><br>© lifeisfood"; var text = selection + copyright; var divElement = document.createElement('div'); divElement.style.position = 'absolute'; divElement.style.left = '-99999px'; divElement.innerHTML = text; bodyElement.appendChild(divElement); selection.selectAllChildren(divElement); setTimeout(function() { bodyElement.removeChild(divElement); }, 0); }; </script> <?php } add_action('wp_footer', 'evgmoskalenko_copyright', 95);
 
