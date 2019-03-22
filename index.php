@@ -65,7 +65,6 @@ get_header();
 								(adsbygoogle = window.adsbygoogle || []).push({});
 							</script>
 
-							
 							<div class="wrapper-bg st-1 cd-section">
 
 								<div class="row">
@@ -73,96 +72,92 @@ get_header();
 										<h3 class="aside-title "><a title="<?php echo get_cat_name($cat) ?>" href="<?php echo get_category_link($cat) ?>">Новые записи</a></h3>
 									</div>
 								</div>
-								<div class="row">
+								<div class="row ">
 									<?php 
 									if (have_posts()) :
 										while (have_posts()) : the_post(); ?>
-											<div class="col-md-6">
-												<div class="entry entry-content-min entry-small post-27 post type-post status-publish format-standard has-post-thumbnail hentry">
-													<div class="entry-content ">
-														<div class="row">
-															<div class="col-md-12">
-																<div class="entry-thumb entry-thumb-type">
-																	<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" class='featured-recipe effect-lily loading'>
-																		<?php if (has_post_thumbnail()) { ?>
+											<div class="col-md-6 mb-2">
+												<div class="card card-cascade narrower card-ecommerce ">
+													<div class="view view-cascade overlay entry-thumb">
 
-																			<img 
-																			title="<?php the_title(); ?>" 
-																			alt="<?php the_title(); ?>"
-																			class="b-lazy img-responsive wp-post-image"
-																			src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-																			data-src="<?php echo get_the_post_thumbnail_url(get_the_ID(),"medium") ?>.webp"
-																			>
-																		<?php } else { ?>
-																			<img title="<?php the_title(); ?>" alt="<?php the_title(); ?>"
-																			src='/wp-content/themes/cooked/assets/img/wirwar.jpg'
-																			class="img-responsive wp-post-image">
-																		<?php } ?>
+														<img 
+														title="<?php the_title(); ?>" 
+														alt="<?php the_title(); ?>"
+														src="<?php echo get_the_post_thumbnail_url(get_the_ID(),"medium") ?>.webp" 
+														class="card-img-top" >
+														<a>
+															<div class="mask rgba-white-slight waves-effect waves-light"></div>
+														</a>
+														<?php showIconCat(14); ?>
+													</div>
+													<div class="card-body card-body-cascade text-center entry-prev ">
+														<a href="" class="text-muted">
+															<h5 class="mb-0">Категория</h5>
+														</a>
+														<h3 class="card-title my-3 h3">
+															<a  class="entry-title entry-title-min"
+															href="<?php the_permalink() ?>"
+															title="<?php trim_title_chars(100, '...'); ?>">
+															<?php trim_title_chars(100, '...'); ?>
 
-																		<?php showIconCat(14); ?>
-																	</a>
-
-																</div>
-																<div class="button-position-c">
-																	<button class="button--moema addPost-btn btn btn-outline-primary-dev"><i
-																		class="fas fa-plus"></i></button>
-																	</div>
-																</div>
-																<div class="col-md-12">
-																	<div class="entry-prev">
-																		<a href="<?php the_permalink() ?>"
-																			title="<?php trim_title_chars(100, '...'); ?>"><h3
-																			class="entry-title entry-title-min"><?php trim_title_chars(100, '...'); ?></h3>
-																		</a>
-																		<hr>
-																		<?php
-
-																		?>
-																		<div class="entry-summary">
-																			<span class="justify-content-end info-cook min-icon show-list-btn d-flex
-																			align-items-center"><span>Список ингредиентов</span><i style="color: #ff1744;"
-																			class="ml-2
-																			fas
-																			fa-caret-down"></i></span>
-																			<?php showListComp(); ?>
-
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
+														</a>
+													</h3>
+													<div class="card-text entry-summary">
+														<span class="justify-content-center info-cook min-icon show-list-btn d-flex
+														align-items-center"><span>Список ингредиентов</span><i style="color: #ff1744;"
+														class="ml-2
+														fas
+														fa-caret-down"></i></span>
+														<?php showListComp(); ?>
+													</div>
+													<div class="card-footer px-1">
+														<span class="float-left">Добавить в закладки</span>
+														<span class="float-right">
+															<a class="" data-toggle="tooltip" data-placement="top" title="" data-original-title="Quick Look">
+																<i class="fas fa-eye ml-3"></i>
+															</a>
+															<a class="" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Wishlist">
+																<i class="fas fa-clock ml-3"></i>
+															</a>
+														</span>
+													</div>
+													<div class="button-position-c">
+														<button class="button--moema addPost-btn btn btn-outline-primary-dev"><i class="fas fa-plus"></i></button>
 													</div>
 												</div>
-											<?php endwhile;?>
-											<?php endif;
-											wp_reset_postdata(); ?>
-												<?php if (  $wp_query->max_num_pages > 1 ) : ?>
-												<script>
-													var ajaxurl = '<?php echo site_url() ?>/wp-admin/admin-ajax.php';
-													var true_posts = '<?php echo serialize($wp_query->query_vars); ?>';
-													var current_page = <?php echo (get_query_var('paged')) ? get_query_var('paged') : 1; ?>;
-													var max_pages = '<?php echo $wp_query->max_num_pages; ?>';
-												</script>
-												<div id="true_loadmore">Загрузить ещё</div>
-											<?php endif; ?>
+											</div>
 										</div>
+									<?php endwhile;?>
+								<?php endif;
+								wp_reset_postdata(); ?>
+								<?php if (  $wp_query->max_num_pages > 1 ) : ?>
+									<script>
+										var ajaxurl = '<?php echo site_url() ?>/wp-admin/admin-ajax.php';
+										var true_posts = '<?php echo serialize($wp_query->query_vars); ?>';
+										var current_page = <?php echo (get_query_var('paged')) ? get_query_var('paged') : 1; ?>;
+										var max_pages = '<?php echo $wp_query->max_num_pages; ?>';
+									</script>
+									<div class="btn_more_wrap col-md-12 d-flex mb-3 justify-content-center">
+										<a href="#" id="true_loadmore">Загрузить ещё</a>
 									</div>
-								</div>
-							</div>
-							<div class="row paginations">
-								<div class="col-md-12 d-flex justify-content-center">
-									<?php the_posts_pagination(); ?>
-								</div>
+								<?php endif; ?>
 							</div>
 						</div>
-
-					</div>
-					<div class="col-md-12">
 					</div>
 				</div>
-				<div class="col-lg-3"> 
-					<?php get_sidebar();?>
+				<div class="row paginations">
+					<div class="col-md-12 d-flex justify-content-center">
+						<?php the_posts_pagination(); ?>
+					</div>
 				</div>
 			</div>
 		</div>
-		<?php get_footer();
+	</div>
+	<div class="col-lg-3"> 
+		<?php get_sidebar();?>
+	</div>
+</div>
+
+</div>
+</div>
+<?php get_footer();

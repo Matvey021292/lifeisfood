@@ -3696,6 +3696,7 @@ span.info-desc{
 
 
 .page-numbers{
+	border: 1px solid #32325d;
 	min-width: 30px;
 	min-height: 30px;
 	padding: 5px;
@@ -3704,13 +3705,60 @@ span.info-desc{
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	color: #8f8f8f;
+	color: #32325d !important; 
+	opacity: 0.2;
+	transition: all 0.3s ease;
+}
+.page-numbers:hover{
+	opacity: 1;
 }
 .page-numbers.current{
 	background: #32325d;
-	color: #fff;
-	box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+	color: #fff !important;
 }
 .nav-links{
 	
+}
+#true_loadmore{
+    padding: .84rem 2.14rem;
+    font-size: .81rem;
+    -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    -o-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    margin: .375rem;
+    border: 0;
+    -webkit-border-radius: .125rem;
+    border-radius: .125rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    white-space: normal;
+    word-wrap: break-word;
+	border: 2px solid #32325d;
+    background-color: transparent;
+    color: #32325d;
+    font-weight: 600;
+    padding-top: .6rem;
+    transition:all 0.3s ease;
+    padding-bottom: .6rem;
+}
+#true_loadmore:hover{
+	background-color: #32325d;
+    border-color: #32325d;
+    color: #fff;
+    -webkit-box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+    box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+}
+.entry-thumb:before{
+	content: :'';
+	display: none;
+}
+.entry-thumb img{
+	width: 100%;
+}
+.view-cascade img{
+	max-height: 240px;
+	object-fit: cover;
+	object-position: center;
 }

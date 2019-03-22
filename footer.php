@@ -10,10 +10,7 @@
  */
 
 ?>
-<nav class="cd-vertical-nav">
-	<ul>
-	</ul>
-</nav> 
+
 <div>
   <div class="container">
     <h2 class=' list-group-item collapse-title list-title'>Последние записи рецептов </h2>

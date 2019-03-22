@@ -985,7 +985,8 @@ jQuery(function($){
             type:'POST', // тип запроса
             success:function(data){
                 if( data ) { 
-                    $('#true_loadmore').text('Загрузить ещё').before(data); // вставляем новые посты
+                    $('#true_loadmore').text('Загрузить ещё'); // вставляем новые посты
+                    $('.btn_more_wrap').before(data);
                     current_page++; // увеличиваем номер страницы на единицу
                     if (current_page == max_pages) $("#true_loadmore").remove(); // если последняя страница, удаляем кнопку
                 } else {

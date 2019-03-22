@@ -21,6 +21,7 @@
   <meta name="twitter:image" content="https://lifeisfood.online/wp-content/themes/cooked/assets/img/LifeIsFood1.png">
   <meta name="twitter:site" content="https://lifeisfood.online/">
   <meta name="yandex-verification" content="3a9234b9afe4e96c" />
+  <link rel='stylesheet' id='compiled.css-css'  href='https://mdbootstrap.com/wp-content/themes/mdbootstrap4/css/compiled-4.7.5.min.css?ver=4.7.5' type='text/css' media='all' />
   <meta name="flattr:id" content="yvzv09">
   <?php wp_head(); ?>
   <!-- Global site tag (gtag.js) - Google Analytics -->
