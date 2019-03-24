@@ -352,8 +352,8 @@ var objPost = {
 };
 var arrPost = [];
 
-var minText = '<i class="fa fa-minus"></i>';
-var plusText = '<i class="fa fa-plus"></i>';
+var minText = '<i class="fas fa-bookmark"></i> Добавлено в закладки';
+var plusText = '<i class="fas fa-bookmark"></i> Добавить в закладки';
 
 function addPost(btn, wrap, title, img, link) {
 
@@ -996,3 +996,9 @@ jQuery(function($){
         });
     });
 });
+
+
+jQuery('.sidebar').stickySidebar({
+    topSpacing: 0,
+    bottomSpacing: 60
+  });
