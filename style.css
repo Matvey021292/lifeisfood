@@ -143,7 +143,7 @@ h6{font-size:12px;}
 
 /* COLORS
 ------------------------------------------------------------------------*/
-.entry-title a{color:#000}
+/*.entry-title a{color:#000}*/
 .tagline{color:#646464;}
 
 /* WORDPRESS CORE
@@ -388,7 +388,7 @@ img.aligncenter { max-width:100%; height:auto;}
 .entry-date{margin-bottom:12px;font-style:italic;font-size:11px;/*font-weight:300*/}
 .entry-date a{color:inherit}
 
-.entry-title{line-height:1.3;margin:0 0 10px;letter-spacing:1px;}
+.entry-title{font-size:19px;margin:0 0 10px;}
 h1.entry-title{margin-bottom:25px}
 
 
@@ -998,13 +998,7 @@ position: fixed;
 .p-b{
 	margin-bottom: 15px;
 }
-.entry-thumb img{
-  background-color: #fff;
-  max-width: 100%;
-  height: auto;
-  max-height: 250px;
-  object-fit: cover;
-}
+
 
 /*.list-group-item{
 	    background: linear-gradient(60deg,#ab47bc,#8e24aa);
@@ -1159,9 +1153,9 @@ header{
 .aside-title a{
  color: #ffffff;
  text-decoration: none !important;
- background: #/*32325d*/;
  background: #32325d;
  padding: 0px 10px;
+ display: inline-block;
 }
 .asite-title-md{
 	font-weight: 900;
@@ -1209,11 +1203,13 @@ header{
 
     }
     .category-img img{
-      max-height: 60px;
-      width: auto;
-      box-shadow: inset 0px 0px 10px #fff;
       border-radius: 50%;
       object-fit: cover;
+      width: 35px;
+      background-color: #fff;
+      padding: 3px;
+      height: 35px;      
+      box-shadow: 0px 10px 20px -8px rgba(0,0,0,.4);
     }
     .info-cook{
       margin-right: 10px;
@@ -1247,20 +1243,10 @@ header{
 
 
     .hide-list {
-      /*width: 100%;*/
-	/*height: 0;*/
-		/*overflow: hidden;*/
-      /*background-color: #fff;*/
-      /*padding: 10px;*/
-      /*z-index: 10;*/
-      /*transition: all 0.3s ease-in;*/
+   
 		display: none;
     }
-    /*.entry-prev{*/
-      /*position: relative;*/
-      /*height: 100%;*/
-      /*overflow:hidden;*/
-    /*}*/
+  
     .show-list{
       opacity: 1;
 		height: 100%;
@@ -1268,17 +1254,14 @@ header{
     }
     .col-cat{
       position: relative;
-      padding: 5px 10px 5px 0px;
-
+    margin: 5px 10px 5px 0;
     }
     .col-cat img{
       max-height: 150px;
       object-fit: cover;
       width: 100%;
     }
-    .widget-area{
-     margin-top: 40px;
-   }
+   
    .widget-area .row{
     width: 100%;
     margin: auto;
@@ -1297,32 +1280,24 @@ header{
     font-weight: 200;
   }
 
-  .category-img img {
-    max-width: 50px;
-    border-radius: 50%;
-    padding: 4px;
-    box-shadow: 0px 10px 20px -8px rgba(0,0,0,0.4);
-  }
+
   .category-img{
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 5px;
+    left: 5px;
     background: transparent;
   }
-/*.entry-content-big .category-img{
-    position: absolute;
-    bottom: 10px;
-    left: 25px;
-    }*/
+
     .entry-thumb-type img{
       max-height: 220px;
     }
     .entry-content-min .entry-title{
       margin-top: 10px;
     }
-    .entry-content-min .entry-summary{
-      /*min-height: 100px;*/
+    .entry-content-min .entry-title a{
+      color: #32325d;
     }
+    
     .entry-content-min .show-content{
       margin-top: 5px;
     }
@@ -1510,6 +1485,7 @@ header{
       will-change: transform;
       border-width: 1px;
       box-shadow: none;
+      position: static;
     }
     .btn-outline-primary-dev:active,
     .btn-outline-primary-dev:focus, 
@@ -1522,10 +1498,9 @@ header{
     }
 
     .aside-title {
-      font-size: 70px;
+      font-size: 65px;
       font-weight: 300;
       margin-top: 0;
-      line-height: 1;
       display: block;
       margin-bottom: 30px;
       text-align: right;
@@ -1803,9 +1778,9 @@ hr{
 
 }
 .disable{
-  background: #FF1744 !important;
+/*  background: #FF1744 !important;
   color: #fff !important;
-  border-color: #fff !important;
+  border-color: #fff !important;*/
 }
 .button-position-c .btn.disable:active, .button-position-c .btn.disable:focus, .button-position-c .btn.disable:hover{
  background: #f50057 !important;
@@ -2567,6 +2542,7 @@ a[aria-expanded="true"] i{
 
     .wrap-news-post .entry-thumb-type img{
         max-height: 150px;
+        object-fit: cover;
     }
     
     .wrap-news-post .entry-prev {
@@ -3192,4 +3168,11 @@ text-align:center;
 .effect-lily{
 	display: block;
 	width: 98%;
+}
+.category-img{
+  cursor: pointer;
+}
+.sidebar__inner{
+  position: sticky;
+  top: 10px;
 }

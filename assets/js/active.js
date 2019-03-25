@@ -358,7 +358,8 @@ var plusText = '<i class="fas fa-bookmark"></i> Добавить в заклад
 function addPost(btn, wrap, title, img, link) {
 
 
-	jQuery(btn).click(function () {
+	jQuery(document).on('click',btn, function (e) {
+        e.preventDefault();
 		var elem = jQuery(this).parents(wrap);
 		var elemTitle = jQuery(elem).find(title).text();
 		var elemLink = jQuery(elem).find(link).attr('href');
@@ -489,6 +490,7 @@ function removeFixedPost(e, wrapSingle, wraptitle, wrapBtn, classBtnMinus) {
 // Add class to button Add to init
 function addClassLoadPage(wrapPost, wrapPostTitle, addClass, btn, elem) {
 	var singlePost = jQuery(wrapPost).find(wrapPostTitle);
+    console.log(singlePost);
 	for (var j = 0; j < singlePost.length; j++) {
 		for (var k = 0; k < elem.length; k++) {
 			if (jQuery(singlePost[j]).text().replace(/\s+/g, '') == elem[k].title.replace(/\s+/g, '')) {
@@ -534,16 +536,6 @@ jQuery(document).ready(function () {
 
 	}
 })
-
-
-// jQuery('#collapse_ingredient').on('shown.bs.collapse', function () {
-//     if(!jQuery('#elem-collapse').find('i').attr('style') == 'transform: rotate(180deg);'){
-//         jQuery('#elem-collapse').find('i').css('transform','rotate(180deg)');
-//     }else{
-//         jQuery('#elem-collapse').find('i').css('transform','');
-//     }
-// });
-
 
 jQuery('.wrapper-bg-cat-min').mouseover(function (event) {
 	jQuery('.nav-box').addClass('nav-box-show')
@@ -998,7 +990,4 @@ jQuery(function($){
 });
 
 
-jQuery('.sidebar').stickySidebar({
-    topSpacing: 0,
-    bottomSpacing: 60
-  });
+

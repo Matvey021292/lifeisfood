@@ -24,13 +24,28 @@ get_header();
 									?>
 								</div>
 							</div>
+
 							<div class="row">
 								<?php
 								while ( have_posts() ) :
+									global $post;
 									the_post();
 									get_template_part( 'template-parts/content', get_post_type() ); ?>
 								<?php	endwhile; ?>
+								<?php wp_reset_postdata(); ?>
+							<?php if (  $wp_query->max_num_pages > 1 ) : ?>
+								<script>
+									var ajaxurl = '<?php echo site_url() ?>/wp-admin/admin-ajax.php';
+									var true_posts = '<?php echo serialize($wp_query->query_vars); ?>';
+									var current_page = <?php echo (get_query_var('paged')) ? get_query_var('paged') : 1; ?>;
+									var max_pages = '<?php echo $wp_query->max_num_pages; ?>';
+								</script>
+								<div class="btn_more_wrap col-md-12 d-flex mb-3 justify-content-center">
+									<a href="#" id="true_loadmore">Загрузить ещё</a>
+								</div>
+							<?php endif; ?>
 							</div>
+
 							<div class="row paginations">
 								<div class="col-md-12 d-flex justify-content-center mb-3">
 									<?php the_posts_pagination();?>
@@ -45,10 +60,11 @@ get_header();
 					</main>
 				</div>
 			</div>
-			<div class="col-md-3">
-				<?php get_sidebar(); ?>
+			<div class="col-lg-3 sidebar p-0"> 
+				<div class="sidebar__inner">
+					<?php get_sidebar();?>	
+				</div>
 			</div>
-
 		</div>
 	</div>
 

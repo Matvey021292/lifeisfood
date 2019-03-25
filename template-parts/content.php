@@ -9,60 +9,57 @@
 
 ?>
 
-
-<div class="col-md-12">
-    <div class="entry entry-content-min entry-small post-27 post type-post status-publish format-standard has-post-thumbnail hentry">
+<?php $title = get_the_title(); ?>
+<div class="col-md-6 mb-2">
+    <div class="card card-cascade narrower card-ecommerce entry">
         <div class="entry-content ">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="entry-thumb ">
-                        <a href="<?php the_permalink(); ?>" class='featured-recipe effect-lily'>
-                            <?php if (has_post_thumbnail()) { ?>
-                                <img alt="<?php the_title(); ?>" src="<?php echo get_the_post_thumbnail_url() ?>"
-                                     class="img-responsive wp-post-image" alt="">
-                            <?php } else { ?>
-                                <img alt="<?php the_title(); ?>" src="/wp-content/themes/cooked/assets/img/wirwar.jpg"
-                                     class="img-responsive wp-post-image" alt="">
-                            <?php } ?>
-                            <?php
-                            if (is_category()) {
-                                $q_cat = get_query_var('cat');
-                                $cat = get_category($q_cat);
-                            }
-                            ?>
-                            <?php showIconCat($cat->category_parent); ?>
-                        </a>
-                    </div>
+            <div class="view view-cascade overlay entry-thumb entry-thumb-type">
+                <img 
+                title="<?= $title; ?>" 
+                alt="<?= $title; ?>"
+                src="<?php echo get_the_post_thumbnail_url(get_the_ID(),"medium") ?>.webp" 
+                class="card-img-top  b-lazy img-responsive wp-post-image b-loaded" >
+                <a class="" href="<?php the_permalink() ?>">
+                    <div class="mask rgba-white-slight waves-effect waves-light"></div>
+                </a>
+                <?php showIconCat(14); ?>
+            </div>
+            <div class="card-body card-body-cascade text-center entry-prev">
+                <div class="article-cat">
+                    <?php echo getPostCat($post->ID);?>
                 </div>
-                <div class="col-md-6">
-                    <div class="entry-prev">
-                        <a href="<?php the_permalink() ?>" title="<?php trim_title_chars(100, '...'); ?>"><h3
-                                    class="entry-title"><?php trim_title_chars(100, '...'); ?></h3></a>
-                        <hr>
-                        <?php
+                <?php  get_the_category($post->ID);?>
+                <h3 class="card-title mb-2 h3 entry-title entry-title-min">
+                    <a  class="entry-title entry-title-min"
+                    href="<?php the_permalink() ?>"
+                    title="<?= $title; ?>">
+                    <?php rtrim(trim_title_chars(100, '...')); ?>
+                </a>
+            </h3>
 
-                        ?>
-                        <span class="info-cook min-icon show-list-btn d-flex align-items-center"><span>Список
-                                        ингредиентов</span><i
-                                    style="color: #ff1744;"
-                                    class="ml-2 fas fa-caret-down"></i></span>
-                        <div class="entry-summary">
-                            <p class="show-content"><?php the_truncated_post(350); ?></p>
-                            <?php showListComp(); ?>
-                        </div>
-                        <div class="d-flex justify-content-end ">
-                            <div class="wrap-info">
-                                <?php showTimeCook('#fff'); ?>
-                                <?php if (function_exists('wpfp_link')) {
-                                    wpfp_link();
-                                } ?>
+            <div  class="card-text entry-summary text-center"> <a class="" data-toggle="collapse" href="#collapseExample<?php echo $post->ID?>" aria-expanded="false" aria-controls="collapseExample<?php echo $post->ID?>">
+                Список ингредиентов <i class="ml-2 fas fa-caret-down"></i>
+            </a> </div>
+            <div class="collapse" id="collapseExample<?php echo $post->ID?>">
+                <?php showListComp(); ?>
+            </div>
+            <div class="card-footer px-1">
+                <a class="float-left  addPost-btn" href='#'><i class="fas fa-bookmark"></i>  Добавить в закладки</a>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <span class="float-right">
+                    <?php $post_meta = get_post_meta ($post->ID,'views',true); $rand = rand(1,1000);?>
+                    <a class="mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="<?php echo ($post_meta) ? $post_meta : $rand ?>">
+                        <span><?php echo ($post_meta) ? $post_meta : $rand; ?></span>
+                        <i class="fas fa-eye ml-1"></i>
+                    </a>
+                    <a class="" data-toggle="tooltip" data-placement="top" title="" data-original-title="<?php echo CFS()->get('_time'); ?>">
+                        <span><?php echo CFS()->get('_time'); ?></span>
+                        <i class="fas fa-clock ml-1"></i>
+                    </a>
+                </span>
             </div>
         </div>
     </div>
-</div> 
+</div>
+</div>
 

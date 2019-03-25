@@ -17,11 +17,12 @@
 		<div class="cat-wrap ">
 			<div class="row">
 				<hr>
-                <h4 class="w-100">Каталог рецептов на каждый день </h4>
+                <h4 class="w-100">Каталог рецептов по типу</h4>
 				<?php 
                 the_services_navigations(14);
                 ?>
 				<hr>
+                <h4 class="w-100">Каталог рецептов по типу</h4>
 				<?php 
                 the_services_navigations(13);
                 ?>
@@ -40,22 +41,6 @@
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
-<!--            <div class="like-wrap">-->
-<!--                --><?php
-//                echo do_shortcode('[rating-system-posts]')
-//                ?>
-<!--                <ol class="grid">-->
-<!--                    <li class="grid__item">-->
-<!--                        <button class="icobutton icobutton--thumbs-up thumbs-up"><span-->
-<!--                                    class="fa fa-thumbs-up"></span></button>-->
-<!--                    </li>-->
-<!--                    <li class="grid__item">-->
-<!--                        <button class="icobutton icobutton--thumbs-up thumbs-down"><span-->
-<!--                                    class="fa fa-thumbs-up"></span></button>-->
-<!--                    </li>-->
-<!--                </ol>-->
-<!--            </div>-->
-
         </div>
 	</div>
 </aside><!-- #secondary -->

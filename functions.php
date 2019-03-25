@@ -125,10 +125,10 @@ add_action( 'widgets_init', 'cooked_widgets_init' );
  * Enqueue scripts and styles.
  */
 function cooked_style() {
-	wp_enqueue_style( 'cooked_style', get_template_directory_uri() . '/assets/css/bootstrap.min.css' );
+	// wp_enqueue_style( 'cooked_style', get_template_directory_uri() . '/assets/css/bootstrap.min.css' );
 	wp_enqueue_style( 'font', get_template_directory_uri() . '/assets/css/font.css' );
 	wp_enqueue_style( 'carousel', get_template_directory_uri() . '/assets/css/owl.carousel.css' );
-	wp_enqueue_style( 'sb-admin', get_template_directory_uri() . '/assets/css/sb-admin.min.css' );
+	// wp_enqueue_style( 'sb-admin', get_template_directory_uri() . '/assets/css/sb-admin.min.css' );
 	wp_enqueue_style( 'styles', get_template_directory_uri() . '/assets/css/style.css' );
 
 }
@@ -220,72 +220,145 @@ function true_load_posts(){
 
 		// запускаем цикл
 		while( have_posts() ): the_post(); ?>
-
-			<div class="col-md-6">
-				<div class="entry entry-content-min entry-small post-27 post type-post status-publish format-standard has-post-thumbnail hentry">
+		<?php global $post;?>
+			<div class="col-md-6 mb-2">
+				<div class="card card-cascade narrower card-ecommerce entry">
 					<div class="entry-content ">
-						<div class="row">
-							<div class="col-md-12">
-								<div class="entry-thumb entry-thumb-type">
-									<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" class='featured-recipe effect-lily loading'>
-										<?php if (has_post_thumbnail()) { ?>
-
-											<img 
-											title="<?php the_title(); ?>" 
-											alt="<?php the_title(); ?>"
-											class="b-lazy img-responsive wp-post-image"
-											src="<?php echo get_the_post_thumbnail_url(get_the_ID(),"medium") ?>.webp"
-											>
-										<?php } else { ?>
-											<img title="<?php the_title(); ?>" alt="<?php the_title(); ?>"
-											src='/wp-content/themes/cooked/assets/img/wirwar.jpg'
-											class="img-responsive wp-post-image">
-										<?php } ?>
-
-										<?php showIconCat(14); ?>
-									</a>
-
-								</div>
-								<div class="button-position-c">
-									<button class="button--moema addPost-btn btn btn-outline-primary-dev"><i
-										class="fas fa-plus"></i></button>
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="entry-prev">
-										<a href="<?php the_permalink() ?>"
-											title="<?php trim_title_chars(100, '...'); ?>"><h3
-											class="entry-title entry-title-min"><?php trim_title_chars(100, '...'); ?></h3>
-										</a>
-										<hr>
-										<?php
-
-										?>
-										<div class="entry-summary">
-											<span class="justify-content-end info-cook min-icon show-list-btn d-flex
-											align-items-center"><span>Список ингредиентов</span><i style="color: #ff1744;"
-											class="ml-2
-											fas
-											fa-caret-down"></i></span>
-											<?php showListComp(); ?>
-
-										</div>
-									</div>
-								</div>
+						<div class="view view-cascade overlay entry-thumb entry-thumb-type">
+							<img 
+							title="<?= $title; ?>" 
+							alt="<?= $title; ?>"
+							src="<?php echo get_the_post_thumbnail_url(get_the_ID(),"medium") ?>.webp" 
+							class="card-img-top  b-lazy img-responsive wp-post-image b-loaded" >
+							<a class="" href="<?php the_permalink() ?>">
+								<div class="mask rgba-white-slight waves-effect waves-light"></div>
+							</a>
+							<?php showIconCat(14); ?>
+						</div>
+						<div class="card-body card-body-cascade text-center entry-prev">
+							<div class="article-cat">
+								<?php echo getPostCat($post->ID);?>
 							</div>
+							<?php  get_the_category($post->ID);?>
+							<h3 class="card-title mb-2 h3 entry-title entry-title-min">
+								<a  class="entry-title entry-title-min"
+								href="<?php the_permalink() ?>"
+								title="<?= $title; ?>">
+								<?php trim_title_chars(100, '...'); ?>
+							</a>
+						</h3>
+
+						<div  class="card-text entry-summary text-center">
+							<a class="" data-toggle="collapse" href="#collapseExample<?php echo $post->ID?>" aria-expanded="false" aria-controls="collapseExample<?php echo $post->ID?>">
+								Список ингредиентов <i class="ml-2 fas fa-caret-down"></i>
+							</a>
+						</div>
+
+
+						<div class="collapse" id="collapseExample<?php echo $post->ID?>">
+							<?php showListComp(); ?>
+						</div>
+						<div class="card-footer px-1">
+							<a class="float-left  addPost-btn" href='#'><i class="fas fa-bookmark"></i>  Добавить в закладки</a>
+
+							<span class="float-right">
+								<?php $post_meta = get_post_meta ($post->ID,'views',true); $rand = rand(1,1000); ?>
+								<a class="mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="<?php echo ($post_meta) ? $post_meta : $rand ?>">
+									<span><?php echo ($post_meta) ? $post_meta : $rand; ?></span>
+									<i class="fas fa-eye ml-1"></i>
+								</a>
+								<a class="" data-toggle="tooltip" data-placement="top" title="" data-original-title="<?php echo CFS()->get('_time'); ?>">
+									<span><?php echo CFS()->get('_time'); ?></span>
+									<i class="fas fa-clock ml-1"></i>
+								</a>
+							</span>
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
 
-			<?php 	endwhile;
+	<?php 	endwhile;
 
-		endif;
-		die();
+endif;
+die();
+}
+
+
+
+function getPostCat($id){
+	$arr = get_the_category($id);
+	$html = '';
+
+	foreach ($arr as $key => $value) {
+		if($value->category_parent == 14){
+			$html .= "<a class='text-muted  ml-1 mr-1' href='/category/type/$value->slug'>{$value->name}</a>";
+		}else{
+			$html .= "<a class='text-muted ml-1 mr-1' href='/category/country/$value->slug'>{$value->name}</a>";
+		}
+		if((count($arr) - 1) != $key){
+			$html .= '<i class="fas fa-circle"></i>'; 
+		}
 	}
+	return $html;
+}
+
+function debug($arr){ echo "<pre>"; print_r($arr); echo "</pre>";}
+
+add_action('wp_ajax_loadmore', 'true_load_posts');
+add_action('wp_ajax_nopriv_loadmore', 'true_load_posts');
+
+function evgmoskalenko_copyright() { ?>
+	<!-- 	 <script> document.oncopy = function () { var bodyElement = document.body; var selection = getSelection(); var href = document.location.href; var copyright = "<br><br>Источник: <a href='"+ href +"'>" + href + "</a><br>© lifeisfood"; var text = selection + copyright; var divElement = document.createElement('div'); divElement.style.position = 'absolute'; divElement.style.left = '-99999px'; divElement.innerHTML = text; bodyElement.appendChild(divElement); selection.selectAllChildren(divElement); setTimeout(function() { bodyElement.removeChild(divElement); }, 0); }; </script>  -->
+<?php } 
+add_action('wp_footer', 'evgmoskalenko_copyright', 95);
 
 
-	add_action('wp_ajax_loadmore', 'true_load_posts');
-	add_action('wp_ajax_nopriv_loadmore', 'true_load_posts');
 
-	function evgmoskalenko_copyright() { ?> <script> document.oncopy = function () { var bodyElement = document.body; var selection = getSelection(); var href = document.location.href; var copyright = "<br><br>Источник: <a href='"+ href +"'>" + href + "</a><br>© lifeisfood"; var text = selection + copyright; var divElement = document.createElement('div'); divElement.style.position = 'absolute'; divElement.style.left = '-99999px'; divElement.innerHTML = text; bodyElement.appendChild(divElement); selection.selectAllChildren(divElement); setTimeout(function() { bodyElement.removeChild(divElement); }, 0); }; </script> <?php } add_action('wp_footer', 'evgmoskalenko_copyright', 95);
+/* Подсчет количества посещений страниц
+---------------------------------------------------------- */
+add_action('wp_head', 'kama_postviews');
+function kama_postviews() {
 
+	/* ------------ Настройки -------------- */
+$meta_key       = 'views';  // Ключ мета поля, куда будет записываться количество просмотров.
+$who_count      = 0;            // Чьи посещения считать? 0 - Всех. 1 - Только гостей. 2 - Только зарегистрированных пользователей.
+$exclude_bots   = 0;            // Исключить ботов, роботов, пауков и прочую нечесть :)? 0 - нет, пусть тоже считаются. 1 - да, исключить из подсчета.
+
+global $user_ID, $post;
+if(is_singular()) {
+	$id = (int)$post->ID;
+	static $post_views = false;
+		if($post_views) return true; // чтобы 1 раз за поток
+		$post_views = (int)get_post_meta($id,$meta_key, true);
+		$should_count = false;
+		switch( (int)$who_count ) {
+			case 0: $should_count = true;
+			break;
+			case 1:
+			if( (int)$user_ID == 0 )
+				$should_count = true;
+			break;
+			case 2:
+			if( (int)$user_ID > 0 )
+				$should_count = true;
+			break;
+		}
+		if( (int)$exclude_bots==1 && $should_count ){
+			$useragent = $_SERVER['HTTP_USER_AGENT'];
+			$notbot = "Mozilla|Opera"; //Chrome|Safari|Firefox|Netscape - все равны Mozilla
+			$bot = "Bot/|robot|Slurp/|yahoo"; //Яндекс иногда как Mozilla представляется
+			if ( !preg_match("/$notbot/i", $useragent) || preg_match("!$bot!i", $useragent) )
+				$should_count = false;
+		}
+
+		if($should_count)
+			if( !update_post_meta($id, $meta_key, ($post_views+1)) ) add_post_meta($id, $meta_key, 1, true);
+	}
+	return true;
+}
+
+
+function getImagePost(){
+	
+}
