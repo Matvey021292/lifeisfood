@@ -335,7 +335,7 @@ function show_postAll($cat, $num)
         if ($cat_data) {
             $cat_links = '';
             foreach ($cat_data as $one_cat_data) { ?>
-                <div class="col-cat <?php if ($elem) echo "col-sm-4 nav-cat"; ?>">
+                <div class="col-cat <?php if ($elem) echo "col-sm-3 nav-cat"; ?>">
                     <?php
                     if ($elem) { ?>
                         <a class='wrap-car-img loading' title="<?php echo $one_cat_data->cat_name; ?>"  href='<?php echo get_category_link($one_cat_data->term_id); ?>'>

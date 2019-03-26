@@ -1205,10 +1205,10 @@ header{
     .category-img img{
       border-radius: 50%;
       object-fit: cover;
-      width: 35px;
       background-color: #fff;
       padding: 3px;
-      height: 35px;      
+      height: 40px; 
+      width: 40px;
       box-shadow: 0px 10px 20px -8px rgba(0,0,0,.4);
     }
     .info-cook{
@@ -1252,7 +1252,7 @@ header{
 		height: 100%;
       transform: translateY(0%);
     }
-    .col-cat{
+    .sidebar__inner .col-cat{
       position: relative;
     margin: 5px 10px 5px 0;
     }
@@ -3175,4 +3175,16 @@ text-align:center;
 .sidebar__inner{
   position: sticky;
   top: 10px;
+}
+.modal-footer{
+  border-top: 0px;
+}
+.modal-dialog .modal-footer button{
+  color: #fff !important;
+}
+.single .entry-thumb-single img{
+    object-fit: cover;
+}
+.form-check{
+  padding-left: 0;
 }

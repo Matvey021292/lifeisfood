@@ -71,13 +71,13 @@ $str = preg_replace("/[^0-9]/", '', $str);
 							<a class="featured-recipe" href="<?php echo get_permalink() ?>"></a>
 							<?php
 							if (has_post_thumbnail()) { ?>
-								<div class="entry-thumb entry-thumb-single effect-lily">
+								<div class="entry-thumb entry-thumb-single ">
 									<img id="single-image" alt="<?php the_title(); ?>" src="<?php echo
 									get_the_post_thumbnail_url() ?>" class="img-responsive wp-post-image">
-									<span class="addPost-btn min-icon"><i class="fas fa-plus"></i></span>
+									
 								</div>
 							<?php } else { ?>
-								<div class="entry-thumb entry-thumb-single effect-lily">
+								<div class="entry-thumb entry-thumb-single ">
 									<img id="single-image" alt="<?php the_title(); ?>"
 									src="/wp-content/themes/cooked/assets/img/wirwar.png"
 									class="img-responsive wp-post-image">
@@ -199,13 +199,6 @@ $str = preg_replace("/[^0-9]/", '', $str);
 														<li class=""><span></span><span class=''></span></li>
 													</ul>
 												</div>
-												<ul class="list-prev-single list-unstyled p-0 m-0 d-flex flex-column ">
-													<li><i class="fas fa-circle"></i><a class="scrollto" href="#desc">Описание</a></li>
-													<li><i class="fas fa-circle"></i><a class="scrollto" href="#list">Ингредиент</a>
-													</li>
-													<li><i class="fas fa-circle"></i><a class="scrollto" href="#step">Пошаговый рецепт
-													приготовления</a></li>
-												</ul>
 												<hr>
 												<div id="desc" class="single-content cd-section mb-5">
 													<h2 class='list-title '>Описание</h2>
@@ -230,150 +223,152 @@ $str = preg_replace("/[^0-9]/", '', $str);
 																		echo '<h4 class="title-sm text-right w-100"><span>'.$value["_steep_group_title"].'</span></h4>';
 																		foreach ($value['_step'] as $field_step) { ?>
 																			<?php if ($field_step['_img_step']) { ?>
-																			<div class="col-md-6 pl-0 ">
-																			<?php }else{ ?>
-																				<div class="col-md-12 pl-0 ">
+																				<div class="col-md-6 pl-0 ">
+																				<?php }else{ ?>
+																					<div class="col-md-12 pl-0 ">
+																					<?php } ?>
+																					<div class="p-b">
+																						<p class="d-inline-block"><?php echo $field_step['_desc_step']; ?></p>
+																					</div>
+																				</div>
+																				<?php if ($field_step['_img_step']) { ?>
+																					<div class="col-md-6 pr-0 mb-3">
+																						<img class="collapse-img"
+																						src="<?php echo $field_step['_img_step']; ?>"
+																						alt="<?php the_title(); ?>">
+																						<span class="count-steep "><?php echo $count; ?></span>
+																					</div>
+																				<?php } else { ?>
 																				<?php } ?>
-																				<div class="p-b">
-																					<p class="d-inline-block"><?php echo $field_step['_desc_step']; ?></p>
-																				</div>
-																			</div>
+																				<hr>
+																				<?php $count++; ?>
+																			<?php }
+																		}
+																	}else{ 
+																		$fields_step = CFS()->get('_step');
+																		$count = 1;
+																		foreach ($fields_step as $field_step) { ?>
 																			<?php if ($field_step['_img_step']) { ?>
-																				<div class="col-md-6 pr-0 mb-3">
-																					<img class="collapse-img"
-																					src="<?php echo $field_step['_img_step']; ?>"
-																					alt="<?php the_title(); ?>">
-																					<span class="count-steep "><?php echo $count; ?></span>
+																				<div class="col-md-6 pl-0 ">
+																				<?php }else{ ?>
+																					<div class="col-md-12 pl-0 ">
+																					<?php } ?>
+																					<div class="p-b">
+																						<p class="d-inline-block"><?php echo $field_step['_desc_step']; ?></p>
+																					</div>
 																				</div>
-																			<?php } else { ?>
-																			<?php } ?>
-																			<hr>
-																			<?php $count++; ?>
-																		<?php }
-																	}
-																}else{ 
-																	$fields_step = CFS()->get('_step');
-																	$count = 1;
-																	foreach ($fields_step as $field_step) { ?>
-																		<?php if ($field_step['_img_step']) { ?>
-																			<div class="col-md-6 pl-0 ">
-																			<?php }else{ ?>
-																				<div class="col-md-12 pl-0 ">
+																				<?php if ($field_step['_img_step']) { ?>
+																					<div class="col-md-6 pr-0 mb-3">
+																						<img class="collapse-img"
+																						src="<?php echo $field_step['_img_step']; ?>"
+																						alt="<?php the_title(); ?>">
+																						<span class="count-steep "><?php echo $count; ?></span>
+																					</div>
+																				<?php } else { ?>
 																				<?php } ?>
-																				<div class="p-b">
-																					<p class="d-inline-block"><?php echo $field_step['_desc_step']; ?></p>
-																				</div>
-																			</div>
-																			<?php if ($field_step['_img_step']) { ?>
-																				<div class="col-md-6 pr-0 mb-3">
-																					<img class="collapse-img"
-																					src="<?php echo $field_step['_img_step']; ?>"
-																					alt="<?php the_title(); ?>">
-																					<span class="count-steep "><?php echo $count; ?></span>
-																				</div>
-																			<?php } else { ?>
-																			<?php } ?>
-																			<hr>
-																			<?php $count++; ?>
-																		<?php }  }
-																		?>
+																				<hr>
+																				<?php $count++; ?>
+																			<?php }  }
+																			?>
+																		</div>
 																	</div>
-																</div>
-																</div> <?php
-															endwhile;
-															?>
+																	</div> <?php
+																endwhile;
+																?>
+															</div>
+														</main>
+													</div>
+
+													<?php $prevPost = get_previous_post(true);
+													if ($prevPost) { ?>
+														<div class="nav-box previous">
+															<?php $prevthumbnail = get_the_post_thumbnail($prevPost->ID, 'full'); ?>
+															<?php previous_post_link('%link', "$prevthumbnail  <button class='link-btn btn btn-outline-primary-dev'><i class='fas fa-chevron-left'></i></button>", TRUE); ?>
 														</div>
-													</main>
-												</div>
 
-												<?php $prevPost = get_previous_post(true);
-												if ($prevPost) { ?>
-													<div class="nav-box previous">
-														<?php $prevthumbnail = get_the_post_thumbnail($prevPost->ID, 'full'); ?>
-														<?php previous_post_link('%link', "$prevthumbnail  <button class='link-btn btn btn-outline-primary-dev'><i class='fas fa-chevron-left'></i></button>", TRUE); ?>
+													<?php }
+													$nextPost = get_next_post(true);
+													if ($nextPost) { ?>
+														<div class="nav-box next" style="float:right;">
+															<?php $nextthumbnail = get_the_post_thumbnail($nextPost->ID, 'full'); ?>
+															<?php next_post_link('%link', "$nextthumbnail  <button class='link-btn btn btn-outline-primary-dev'><i class='fas fa-chevron-right'></i></button>", TRUE); ?>
+														</div>
+													<?php } ?>
+
+													<div>
+														<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+														<ins class="adsbygoogle"
+														style="display:block; text-align:center;"
+														data-ad-layout="in-article"
+														data-ad-format="fluid"
+														data-ad-client="ca-pub-1422844265004757"
+														data-ad-slot="3078391695"></ins>
+														<script>
+															(adsbygoogle = window.adsbygoogle || []).push({});
+														</script>
 													</div>
-
-												<?php }
-												$nextPost = get_next_post(true);
-												if ($nextPost) { ?>
-													<div class="nav-box next" style="float:right;">
-														<?php $nextthumbnail = get_the_post_thumbnail($nextPost->ID, 'full'); ?>
-														<?php next_post_link('%link', "$nextthumbnail  <button class='link-btn btn btn-outline-primary-dev'><i class='fas fa-chevron-right'></i></button>", TRUE); ?>
-													</div>
-												<?php } ?>
-
-<div>
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-1422844265004757"
-     data-ad-slot="3078391695"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-												<div class="similar_records">
-													<h3 class="title-more">Похожие записи</h3>
-													<?php $categories = get_the_category($post->ID);
-													if ($categories) {
-														$category_ids = array();
-														foreach ($categories as $individual_category) $category_ids[] = $individual_category->term_id;
-														$args = array(
+													<div class="similar_records">
+														<h3 class="title-more">Похожие записи</h3>
+														<?php $categories = get_the_category($post->ID);
+														if ($categories) {
+															$category_ids = array();
+															foreach ($categories as $individual_category) $category_ids[] = $individual_category->term_id;
+															$args = array(
                             'category__in' => $category_ids, // Сортировка производится по категориям
                             'orderby' => rand, // Условие сортировки рандом
                             'post__not_in' => array($post->ID),
                             'showposts' => 4, //Количество выводимых записей
                             'caller_get_posts' => 1); // Запрещаем повторение ссылок
-														$my_query = new wp_query($args);
-														if ($my_query->have_posts()) {
-															echo '<div class="conteiner"><div class="row">';
-															while ($my_query->have_posts()) {
-																$my_query->the_post();
-																?>
-																<div class="col-md-3">
-																	<div class="entry entry-more">
-																		<div class="entry-thumb effect-lily">
-																			<a class="featured-recipe" href="<?php the_permalink() ?>" rel="bookmark"
-																				title="<?php the_title_attribute(); ?>">
-																				<?php if (has_post_thumbnail()) { ?>
-																					<img alt="<?php the_title(); ?>"
-																					src="<?php echo get_the_post_thumbnail_url() ?>"
-																					class="img-responsive wp-post-image" alt="">
-																				<?php } else { ?>
-																					<img alt="<?php the_title(); ?>"
-																					src="/wp-content/themes/cooked/assets/img/wirwar.jpg"
-																					class="img-responsive wp-post-image" alt="">
-																				<?php } ?>
-																			</a>
+															$my_query = new wp_query($args);
+															if ($my_query->have_posts()) {
+																echo '<div class="conteiner"><div class="row">';
+																while ($my_query->have_posts()) {
+																	$my_query->the_post();
+																	?>
+																	<div class="col-md-3">
+																		<div class="entry entry-more">
+																			<div class="entry-thumb effect-lily">
+																				<a class="featured-recipe" href="<?php the_permalink() ?>" rel="bookmark"
+																					title="<?php the_title_attribute(); ?>">
+																					<?php if (has_post_thumbnail()) { ?>
+																						<img alt="<?php the_title(); ?>"
+																						src="<?php echo get_the_post_thumbnail_url() ?>"
+																						class="img-responsive wp-post-image" alt="">
+																					<?php } else { ?>
+																						<img alt="<?php the_title(); ?>"
+																						src="/wp-content/themes/cooked/assets/img/wirwar.jpg"
+																						class="img-responsive wp-post-image" alt="">
+																					<?php } ?>
+																				</a>
+																			</div>
 																		</div>
 																	</div>
-																</div>
 
-																<?php
+																	<?php
+																}
+																echo '</div></div>';
 															}
-															echo '</div></div>';
+															wp_reset_query();
 														}
-														wp_reset_query();
-													}
-													?></div>
-													<div>
-														<?php
-														if (comments_open() || get_comments_number()) :
-															comments_template();
-													endif;
-													?>
+														?></div>
+														<div>
+															<?php
+															if (comments_open() || get_comments_number()) :
+																comments_template();
+														endif;
+														?>
+													</div>
+												</div>
+												<div class="col-lg-3 sidebar p-0"> 
+													<div class="sidebar__inner">
+														<?php get_sidebar();?>	
+													</div>
 												</div>
 											</div>
-											<div class="col-md-3">
-												<?php get_sidebar(); ?>
-											</div>
 										</div>
-									</div>
-									<div class="fixed-ing">
-										<?php include 'custom-folder/custom-ingredient.php'; ?>
-									</div>
+										<div class="fixed-ing">
+											<?php include 'custom-folder/custom-ingredient.php'; ?>
+										</div>
 
-									<?php
-									get_footer();
+										<?php
+										get_footer();
